@@ -1,6 +1,6 @@
 if (Meteor.isClient) {
 
-  var defaultPuzzle = 'HQMMPV LXV QF EOVZ KBI ELZY YB FVV OBE PBZX KBIW JLW EQPP PLFY QZFYVLM BS FVVQZX OBE SLFY QY EQPP XB.';
+  let defaultPuzzle = 'HQMMPV LXV QF EOVZ KBI ELZY YB FVV OBE PBZX KBIW JLW EQPP PLFY QZFYVLM BS FVVQZX OBE SLFY QY EQPP XB.';
   Session.set('puzzle', defaultPuzzle);
 
   Template.puzzle.helpers({
@@ -8,37 +8,36 @@ if (Meteor.isClient) {
       return Session.get('puzzle');
     },
     solved: function() {
-      var puzzle = Session.get('puzzle');
-      var replacements = Session.get('letters');
-      var puzzleParts = puzzle.split('');
-      var solved = [];
+      let puzzle = Session.get('puzzle');
+      let replacements = Session.get('letters');
+      let puzzleParts = puzzle.split('');
 
-      for(var l in puzzleParts) {
-
-        if(puzzleParts[l] === ' ') {
+      let resolved = puzzleParts.reduce(function(solved, l){
+        if(l === ' ') {
           solved.push(' ');
-          continue;
+          return solved;
         }
-        let rep = _.findWhere(replacements, {key: puzzleParts[l].toUpperCase()});
+        let rep = _.findWhere(replacements, {key: l.toUpperCase()});
         if(!rep) {
-          solved.push(puzzleParts[l]);
-          continue;
+          solved.push(l);
+          return solved;
         } else if(rep.value === '') {
           solved.push('-');
-          continue;
+          return solved;;
         }
 
         solved.push(rep.value.toUpperCase());
-      }
+        return solved;
+      }, []);
 
-      return solved.join('');
-
+      return resolved.join('');
     }
+
   });
 
   Template.puzzle.events({
     "change #thePuzzle": function(e) {
-      var puzzle = $(e.currentTarget).val();
+      let puzzle = $(e.currentTarget).val();
       Session.set('puzzle', puzzle);
     }
   })
