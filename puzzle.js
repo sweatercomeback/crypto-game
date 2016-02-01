@@ -12,7 +12,7 @@ if (Meteor.isClient) {
       let replacements = Session.get('letters');
       let puzzleParts = puzzle.split('');
 
-      let resolved = puzzleParts.reduce(function(solved, l){
+      return puzzleParts.reduce(function(solved, l){
         if(l === ' ') {
           solved.push(' ');
           return solved;
@@ -28,9 +28,8 @@ if (Meteor.isClient) {
 
         solved.push(rep.value.toUpperCase());
         return solved;
-      }, []);
-
-      return resolved.join('');
+      }, [])
+      .join('');
     }
 
   });
