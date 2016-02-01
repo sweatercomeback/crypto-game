@@ -1,0 +1,12 @@
+<template name="replacement">
+  <div class="row">
+  {{#each replacementLetters}}
+    <div class="form-group clearfix col-sm-3">
+    <label class="pull-left" style="width: 25px; padding-top: 2px;">
+      {{key}}:
+    </label>
+    <input type="text" name="valueOf{{key}}" value="{{value}}" class="pull-left" style="width: 25px;text-align:center;">
+    </div>
+  {{/each}}
+  </div>
+</template>
