@@ -27,6 +27,13 @@ if (Meteor.isClient) {
       rep.value = newReplacement;
 
       Session.set('letters', letters);
+    },
+    "click .js-clear-replacements": function(){
+      let letters = Session.get('letters');
+      letters.map(function(l) {
+        return l.value = '';
+      });
+      Session.set('letters', letters);
     }
   })
 }

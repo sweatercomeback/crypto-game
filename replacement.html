@@ -1,7 +1,7 @@
 <template name="replacement">
   <div class="row">
   {{#each replacementLetters}}
-    <div class="form-group clearfix col-xs-4">
+    <div class="form-group col-xs-4">
       <label class="col-xs-4" >
         {{key}}:
       </label>
@@ -10,5 +10,9 @@
       </div>
     </div>
   {{/each}}
+  <div class="col-xs-4">
+    <button class="js-clear-replacements col-xs-offset-4 btn btn-danger" >Clear</button>
   </div>
+  </div>
+
 </template>
