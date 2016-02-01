@@ -15,9 +15,8 @@ if (Meteor.isClient) {
 
   Template.replacement.events({
     "change input": function(e, i) {
-      console.log("changed");
       var letters = Session.get('letters');
-      var newReplacement = $(e.currentTarget).val();
+      var newReplacement = $(e.currentTarget).val().toUpperCase();
       let existingRep = _.findWhere(letters, {value: newReplacement});
       if(!!existingRep) {
         existingRep.value = '';
